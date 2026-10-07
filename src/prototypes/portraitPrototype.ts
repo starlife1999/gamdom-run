@@ -3,6 +3,7 @@ import { BootScene } from '../game/scenes/BootScene';
 import { ResultScene } from '../game/scenes/ResultScene';
 import { RunnerScene } from '../game/scenes/RunnerScene';
 import { PORTRAIT_PROTOTYPE_PROFILE } from '../presentationProfiles';
+import { HomeScreen } from '../ui/HomeScreen';
 import { PortraitPresentation } from './portraitPresentation';
 import './portraitPrototype.css';
 
@@ -19,6 +20,12 @@ const game = new Phaser.Game({
 });
 
 const presentation = new PortraitPresentation(game, PORTRAIT_PROTOTYPE_PROFILE);
+const startPanel = document.querySelector<HTMLElement>('#portrait-start')!;
+startPanel.hidden = true;
+new HomeScreen(game, {
+  readyEvent: 'portrait-prototype-ready',
+  onPlay: () => { startPanel.hidden = false; },
+});
 if (new URLSearchParams(location.search).get('frameDiagnostic') === '1') {
   void import('../diagnostics/portraitFrameDiagnostics').then(module => module.installPortraitFrameDiagnostics(game, presentation));
 }
