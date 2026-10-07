@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>GAMDOM RUN</title>
+  </head>
+  <body>
+    <main id="game-shell">
+      <div id="app"></div>
+      <section id="orientation-overlay" role="dialog" aria-modal="true"
+        aria-labelledby="orientation-title" aria-describedby="orientation-description" hidden>
+        <div class="orientation-content">
+          <p class="orientation-brand">GAMDOM RUN</p>
+          <div class="rotation-visual" aria-hidden="true">
+            <span class="rotation-phone"></span>
+            <span class="rotation-arrow">&#8635;</span>
+          </div>
+          <h1 id="orientation-title">ROTATE YOUR PHONE</h1>
+          <p id="orientation-description">This game is designed for landscape.</p>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

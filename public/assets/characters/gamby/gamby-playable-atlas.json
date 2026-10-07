@@ -1,0 +1,900 @@
+{
+  "frames": {
+    "idle_0": {
+      "frame": {
+        "x": 4,
+        "y": 4,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "idle_1": {
+      "frame": {
+        "x": 300,
+        "y": 4,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "run_0": {
+      "frame": {
+        "x": 596,
+        "y": 4,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "run_1": {
+      "frame": {
+        "x": 4,
+        "y": 204,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "run_2": {
+      "frame": {
+        "x": 300,
+        "y": 204,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "run_3": {
+      "frame": {
+        "x": 596,
+        "y": 204,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "jump_0": {
+      "frame": {
+        "x": 4,
+        "y": 404,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "jump_1": {
+      "frame": {
+        "x": 300,
+        "y": 404,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "double_jump_0": {
+      "frame": {
+        "x": 596,
+        "y": 404,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "double_jump_1": {
+      "frame": {
+        "x": 4,
+        "y": 604,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "fall_0": {
+      "frame": {
+        "x": 300,
+        "y": 604,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "fall_1": {
+      "frame": {
+        "x": 596,
+        "y": 604,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "slide_0": {
+      "frame": {
+        "x": 4,
+        "y": 804,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "slide_1": {
+      "frame": {
+        "x": 300,
+        "y": 804,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "hit_0": {
+      "frame": {
+        "x": 596,
+        "y": 804,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "hit_1": {
+      "frame": {
+        "x": 4,
+        "y": 1004,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "win_0": {
+      "frame": {
+        "x": 300,
+        "y": 1004,
+        "w": 288,
+        "h": 192
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 288,
+        "h": 192
+      },
+      "sourceSize": {
+        "w": 288,
+        "h": 192
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    }
+  },
+  "meta": {
+    "app": "Gamby V2 deterministic atlas builder",
+    "version": "1",
+    "image": "gamby-playable-atlas.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 888,
+      "h": 1200
+    },
+    "scale": "1",
+    "gambyAlignment": {
+      "source": "gamby-extraction-source-v2.png",
+      "sourceSha256": "2495119867e462df885e8bfddd204a059211840f4f32101255df6f92d030171c",
+      "canvas": [
+        288,
+        192
+      ],
+      "standingBaseline": 180,
+      "airborneBodyCenter": [
+        144.0,
+        120
+      ],
+      "standingBottomPadding": 12,
+      "packingPadding": 4,
+      "pixelScale": 1,
+      "frames": {
+        "idle_0": {
+          "sourceRect": [
+            45,
+            4,
+            80,
+            119
+          ],
+          "bodyBounds": [
+            50,
+            10,
+            69,
+            107
+          ],
+          "alignment": "standing",
+          "sourceAnchor": [
+            87.5,
+            117
+          ],
+          "pasteOffset": [
+            102,
+            67
+          ],
+          "normalizedAnchor": [
+            144.5,
+            180
+          ]
+        },
+        "idle_1": {
+          "sourceRect": [
+            156,
+            3,
+            79,
+            120
+          ],
+          "bodyBounds": [
+            162,
+            9,
+            67,
+            108
+          ],
+          "alignment": "standing",
+          "sourceAnchor": [
+            197.0,
+            117
+          ],
+          "pasteOffset": [
+            103,
+            66
+          ],
+          "normalizedAnchor": [
+            144.0,
+            180
+          ]
+        },
+        "run_0": {
+          "sourceRect": [
+            20,
+            128,
+            104,
+            130
+          ],
+          "bodyBounds": [
+            25,
+            135,
+            94,
+            117
+          ],
+          "alignment": "standing",
+          "sourceAnchor": [
+            87.5,
+            252
+          ],
+          "pasteOffset": [
+            76,
+            56
+          ],
+          "normalizedAnchor": [
+            143.5,
+            180
+          ]
+        },
+        "run_1": {
+          "sourceRect": [
+            143,
+            124,
+            110,
+            129
+          ],
+          "bodyBounds": [
+            148,
+            130,
+            100,
+            117
+          ],
+          "alignment": "standing",
+          "sourceAnchor": [
+            211.0,
+            247
+          ],
+          "pasteOffset": [
+            76,
+            57
+          ],
+          "normalizedAnchor": [
+            144.0,
+            180
+          ]
+        },
+        "run_2": {
+          "sourceRect": [
+            275,
+            127,
+            114,
+            132
+          ],
+          "bodyBounds": [
+            280,
+            134,
+            101,
+            119
+          ],
+          "alignment": "standing",
+          "sourceAnchor": [
+            348.5,
+            253
+          ],
+          "pasteOffset": [
+            70,
+            54
+          ],
+          "normalizedAnchor": [
+            143.5,
+            180
+          ]
+        },
+        "run_3": {
+          "sourceRect": [
+            413,
+            127,
+            112,
+            132
+          ],
+          "bodyBounds": [
+            419,
+            135,
+            100,
+            119
+          ],
+          "alignment": "standing",
+          "sourceAnchor": [
+            486.5,
+            254
+          ],
+          "pasteOffset": [
+            70,
+            53
+          ],
+          "normalizedAnchor": [
+            143.5,
+            180
+          ]
+        },
+        "jump_0": {
+          "sourceRect": [
+            24,
+            254,
+            121,
+            132
+          ],
+          "bodyBounds": [
+            30,
+            261,
+            109,
+            118
+          ],
+          "alignment": "airborne",
+          "sourceAnchor": [
+            96.5,
+            320.0
+          ],
+          "pasteOffset": [
+            72,
+            54
+          ],
+          "normalizedAnchor": [
+            144.5,
+            120.0
+          ]
+        },
+        "jump_1": {
+          "sourceRect": [
+            163,
+            261,
+            124,
+            122
+          ],
+          "bodyBounds": [
+            169,
+            267,
+            112,
+            110
+          ],
+          "alignment": "airborne",
+          "sourceAnchor": [
+            239.5,
+            322.0
+          ],
+          "pasteOffset": [
+            68,
+            59
+          ],
+          "normalizedAnchor": [
+            144.5,
+            120.0
+          ]
+        },
+        "double_jump_0": {
+          "sourceRect": [
+            26,
+            384,
+            113,
+            120
+          ],
+          "bodyBounds": [
+            32,
+            391,
+            100,
+            108
+          ],
+          "alignment": "airborne",
+          "sourceAnchor": [
+            80.0,
+            445.0
+          ],
+          "pasteOffset": [
+            90,
+            59
+          ],
+          "normalizedAnchor": [
+            144.0,
+            120.0
+          ]
+        },
+        "double_jump_1": {
+          "sourceRect": [
+            157,
+            381,
+            131,
+            121
+          ],
+          "bodyBounds": [
+            163,
+            388,
+            118,
+            109
+          ],
+          "alignment": "airborne",
+          "sourceAnchor": [
+            229.0,
+            442.5
+          ],
+          "pasteOffset": [
+            72,
+            58
+          ],
+          "normalizedAnchor": [
+            144.0,
+            119.5
+          ]
+        },
+        "fall_0": {
+          "sourceRect": [
+            154,
+            501,
+            108,
+            104
+          ],
+          "bodyBounds": [
+            160,
+            509,
+            95,
+            90
+          ],
+          "alignment": "airborne",
+          "sourceAnchor": [
+            222.0,
+            554.0
+          ],
+          "pasteOffset": [
+            76,
+            67
+          ],
+          "normalizedAnchor": [
+            144.0,
+            120.0
+          ]
+        },
+        "fall_1": {
+          "sourceRect": [
+            281,
+            505,
+            101,
+            105
+          ],
+          "bodyBounds": [
+            288,
+            512,
+            88,
+            92
+          ],
+          "alignment": "airborne",
+          "sourceAnchor": [
+            342.0,
+            558.0
+          ],
+          "pasteOffset": [
+            83,
+            67
+          ],
+          "normalizedAnchor": [
+            144.0,
+            120.0
+          ]
+        },
+        "slide_0": {
+          "sourceRect": [
+            222,
+            608,
+            207,
+            73
+          ],
+          "bodyBounds": [
+            288,
+            610,
+            138,
+            69
+          ],
+          "alignment": "grounded",
+          "sourceAnchor": [
+            358,
+            679
+          ],
+          "pasteOffset": [
+            8,
+            109
+          ],
+          "normalizedAnchor": [
+            144,
+            180
+          ]
+        },
+        "slide_1": {
+          "sourceRect": [
+            432,
+            610,
+            193,
+            72
+          ],
+          "bodyBounds": [
+            490,
+            613,
+            130,
+            67
+          ],
+          "alignment": "grounded",
+          "sourceAnchor": [
+            549,
+            680
+          ],
+          "pasteOffset": [
+            27,
+            110
+          ],
+          "normalizedAnchor": [
+            144,
+            180
+          ]
+        },
+        "hit_0": {
+          "sourceRect": [
+            22,
+            680,
+            120,
+            102
+          ],
+          "bodyBounds": [
+            35,
+            690,
+            93,
+            88
+          ],
+          "alignment": "grounded",
+          "sourceAnchor": [
+            81.5,
+            778
+          ],
+          "pasteOffset": [
+            84,
+            82
+          ],
+          "normalizedAnchor": [
+            143.5,
+            180
+          ]
+        },
+        "hit_1": {
+          "sourceRect": [
+            1029,
+            690,
+            139,
+            92
+          ],
+          "bodyBounds": [
+            1036,
+            710,
+            122,
+            68
+          ],
+          "alignment": "grounded",
+          "sourceAnchor": [
+            1097,
+            778
+          ],
+          "pasteOffset": [
+            76,
+            92
+          ],
+          "normalizedAnchor": [
+            144,
+            180
+          ]
+        },
+        "win_0": {
+          "sourceRect": [
+            1263,
+            768,
+            105,
+            119
+          ],
+          "bodyBounds": [
+            1269,
+            781,
+            85,
+            100
+          ],
+          "alignment": "grounded",
+          "sourceAnchor": [
+            1311.5,
+            881
+          ],
+          "pasteOffset": [
+            96,
+            67
+          ],
+          "normalizedAnchor": [
+            144.5,
+            180
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,840 @@
+{
+  "frames": {
+    "idle_0": {
+      "frame": {
+        "x": 4,
+        "y": 4,
+        "w": 384,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 384,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "idle_1": {
+      "frame": {
+        "x": 396,
+        "y": 4,
+        "w": 384,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 384,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "run_0": {
+      "frame": {
+        "x": 788,
+        "y": 4,
+        "w": 384,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 384,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "run_1": {
+      "frame": {
+        "x": 4,
+        "y": 268,
+        "w": 384,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 384,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "run_2": {
+      "frame": {
+        "x": 396,
+        "y": 268,
+        "w": 384,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 384,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "jump_0": {
+      "frame": {
+        "x": 788,
+        "y": 268,
+        "w": 384,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 384,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "double_jump_0": {
+      "frame": {
+        "x": 4,
+        "y": 532,
+        "w": 384,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 384,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "double_jump_1": {
+      "frame": {
+        "x": 396,
+        "y": 532,
+        "w": 384,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 384,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "fall_0": {
+      "frame": {
+        "x": 788,
+        "y": 532,
+        "w": 384,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 384,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "slide_0": {
+      "frame": {
+        "x": 4,
+        "y": 796,
+        "w": 384,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 384,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "slide_1": {
+      "frame": {
+        "x": 396,
+        "y": 796,
+        "w": 384,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 384,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "hit_0": {
+      "frame": {
+        "x": 788,
+        "y": 796,
+        "w": 384,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 384,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "hit_1": {
+      "frame": {
+        "x": 4,
+        "y": 1060,
+        "w": 384,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 384,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    },
+    "win_0": {
+      "frame": {
+        "x": 396,
+        "y": 1060,
+        "w": 384,
+        "h": 256
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 384,
+        "h": 256
+      },
+      "sourceSize": {
+        "w": 384,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 1
+      }
+    }
+  },
+  "meta": {
+    "app": "Yungreal body-landmark atlas builder",
+    "version": "1",
+    "image": "yungreal-playable-atlas.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 1176,
+      "h": 1320
+    },
+    "scale": "1",
+    "yungrealAlignment": {
+      "factors": {
+        "main": 1.0,
+        "run": 0.48,
+        "double_jump": 0.382,
+        "slide": 0.5,
+        "hit": 0.43
+      },
+      "canvas": [
+        384,
+        256
+      ],
+      "baseline": 240,
+      "bottomPadding": 16,
+      "sourceHashes": {
+        "main": "3129ae19b10bc7399ac8a6e7f85f791a217da63f9c379745ae0a2badf245e5d0",
+        "run": "ce4bb30c6624c95ffb0c24466ca0e1d6bd7cc2269e4575e9001310f9d99aa5cd",
+        "double_jump": "7839e8d3107e3e7b5604bc859a409468bc5202e63919d81ec7538d768719a02d",
+        "slide": "849ec30771dcc11f37279afca3ffdc880f11fa6f1f324dfe378b1e258532840e",
+        "hit": "ceb5ffcb1c285cfcf38c7e49590898bdbee06e5b477f8aa2b460463db33214d7"
+      },
+      "sourcesUnchanged": true,
+      "frames": {
+        "idle_0": {
+          "source": "yungreal-main-source-v3-clean.png",
+          "sourceRect": [
+            14,
+            52,
+            119,
+            225
+          ],
+          "preprocessingFactor": 1.0,
+          "sourceAnchor": [
+            78,
+            273
+          ],
+          "alignment": "grounded",
+          "pasteOffset": [
+            128,
+            19
+          ],
+          "normalizedAnchor": [
+            192.0,
+            240.0
+          ],
+          "normalizedCropSize": [
+            119,
+            225
+          ],
+          "alpha32Bounds": [
+            2,
+            4,
+            114,
+            217
+          ]
+        },
+        "idle_1": {
+          "source": "yungreal-main-source-v3-clean.png",
+          "sourceRect": [
+            139,
+            51,
+            118,
+            227
+          ],
+          "preprocessingFactor": 1.0,
+          "sourceAnchor": [
+            201,
+            274
+          ],
+          "alignment": "grounded",
+          "pasteOffset": [
+            130,
+            17
+          ],
+          "normalizedAnchor": [
+            192.0,
+            240.0
+          ],
+          "normalizedCropSize": [
+            118,
+            227
+          ],
+          "alpha32Bounds": [
+            1,
+            4,
+            113,
+            219
+          ]
+        },
+        "run_0": {
+          "source": "yungreal-run-source-v1-clean.png",
+          "sourceRect": [
+            28,
+            165,
+            330,
+            456
+          ],
+          "preprocessingFactor": 0.48,
+          "sourceAnchor": [
+            181,
+            616
+          ],
+          "alignment": "grounded",
+          "pasteOffset": [
+            119,
+            24
+          ],
+          "normalizedAnchor": [
+            192.44,
+            240.48
+          ],
+          "normalizedCropSize": [
+            159,
+            219
+          ],
+          "alpha32Bounds": [
+            2,
+            2,
+            155,
+            215
+          ]
+        },
+        "run_1": {
+          "source": "yungreal-run-source-v1-clean.png",
+          "sourceRect": [
+            389,
+            167,
+            306,
+            452
+          ],
+          "preprocessingFactor": 0.48,
+          "sourceAnchor": [
+            529,
+            614
+          ],
+          "alignment": "grounded",
+          "pasteOffset": [
+            125,
+            25
+          ],
+          "normalizedAnchor": [
+            192.2,
+            239.56
+          ],
+          "normalizedCropSize": [
+            147,
+            217
+          ],
+          "alpha32Bounds": [
+            2,
+            2,
+            143,
+            213
+          ]
+        },
+        "run_2": {
+          "source": "yungreal-run-source-v1-clean.png",
+          "sourceRect": [
+            1782,
+            166,
+            358,
+            458
+          ],
+          "preprocessingFactor": 0.48,
+          "sourceAnchor": [
+            1973,
+            620
+          ],
+          "alignment": "grounded",
+          "pasteOffset": [
+            100,
+            22
+          ],
+          "normalizedAnchor": [
+            191.68,
+            239.92
+          ],
+          "normalizedCropSize": [
+            172,
+            220
+          ],
+          "alpha32Bounds": [
+            2,
+            2,
+            168,
+            216
+          ]
+        },
+        "jump_0": {
+          "source": "yungreal-main-source-v3-clean.png",
+          "sourceRect": [
+            312,
+            300,
+            172,
+            208
+          ],
+          "preprocessingFactor": 1.0,
+          "sourceAnchor": [
+            405.5,
+            421.5
+          ],
+          "alignment": "airborne",
+          "pasteOffset": [
+            98,
+            28
+          ],
+          "normalizedAnchor": [
+            191.5,
+            149.5
+          ],
+          "normalizedCropSize": [
+            172,
+            208
+          ],
+          "alpha32Bounds": [
+            3,
+            0,
+            167,
+            204
+          ]
+        },
+        "double_jump_0": {
+          "source": "yungreal-double-jump-source-v2.png",
+          "sourceRect": [
+            26,
+            179,
+            414,
+            426
+          ],
+          "preprocessingFactor": 0.382,
+          "sourceAnchor": [
+            248,
+            437
+          ],
+          "alignment": "airborne",
+          "pasteOffset": [
+            107,
+            51
+          ],
+          "normalizedAnchor": [
+            191.804,
+            149.55599999999998
+          ],
+          "normalizedCropSize": [
+            159,
+            163
+          ],
+          "alpha32Bounds": [
+            2,
+            1,
+            155,
+            160
+          ]
+        },
+        "double_jump_1": {
+          "source": "yungreal-double-jump-source-v2.png",
+          "sourceRect": [
+            452,
+            158,
+            418,
+            424
+          ],
+          "preprocessingFactor": 0.382,
+          "sourceAnchor": [
+            671,
+            415
+          ],
+          "alignment": "airborne",
+          "pasteOffset": [
+            108,
+            52
+          ],
+          "normalizedAnchor": [
+            191.65800000000002,
+            150.174
+          ],
+          "normalizedCropSize": [
+            160,
+            162
+          ],
+          "alpha32Bounds": [
+            1,
+            2,
+            157,
+            158
+          ]
+        },
+        "fall_0": {
+          "source": "yungreal-main-source-v3-clean.png",
+          "sourceRect": [
+            795,
+            352,
+            168,
+            191
+          ],
+          "preprocessingFactor": 1.0,
+          "sourceAnchor": [
+            875,
+            473
+          ],
+          "alignment": "airborne",
+          "pasteOffset": [
+            112,
+            29
+          ],
+          "normalizedAnchor": [
+            192.0,
+            150.0
+          ],
+          "normalizedCropSize": [
+            168,
+            191
+          ],
+          "alpha32Bounds": [
+            4,
+            1,
+            160,
+            186
+          ]
+        },
+        "slide_0": {
+          "source": "yungreal-slide-source-v1-clean.png",
+          "sourceRect": [
+            594,
+            249,
+            508,
+            356
+          ],
+          "preprocessingFactor": 0.5,
+          "sourceAnchor": [
+            810,
+            601
+          ],
+          "alignment": "grounded",
+          "pasteOffset": [
+            84,
+            64
+          ],
+          "normalizedAnchor": [
+            192.0,
+            240.0
+          ],
+          "normalizedCropSize": [
+            254,
+            178
+          ],
+          "alpha32Bounds": [
+            2,
+            2,
+            250,
+            174
+          ]
+        },
+        "slide_1": {
+          "source": "yungreal-slide-source-v1-clean.png",
+          "sourceRect": [
+            1104,
+            265,
+            532,
+            334
+          ],
+          "preprocessingFactor": 0.5,
+          "sourceAnchor": [
+            1344,
+            594
+          ],
+          "alignment": "grounded",
+          "pasteOffset": [
+            72,
+            76
+          ],
+          "normalizedAnchor": [
+            192.0,
+            240.5
+          ],
+          "normalizedCropSize": [
+            266,
+            167
+          ],
+          "alpha32Bounds": [
+            2,
+            2,
+            261,
+            163
+          ]
+        },
+        "hit_0": {
+          "source": "yungreal-hit-source-v1-clean.png",
+          "sourceRect": [
+            617,
+            181,
+            472,
+            406
+          ],
+          "preprocessingFactor": 0.43,
+          "sourceAnchor": [
+            847,
+            582
+          ],
+          "alignment": "grounded",
+          "pasteOffset": [
+            93,
+            68
+          ],
+          "normalizedAnchor": [
+            191.89999999999998,
+            240.43
+          ],
+          "normalizedCropSize": [
+            203,
+            175
+          ],
+          "alpha32Bounds": [
+            2,
+            7,
+            199,
+            166
+          ]
+        },
+        "hit_1": {
+          "source": "yungreal-hit-source-v1-clean.png",
+          "sourceRect": [
+            1140,
+            180,
+            522,
+            420
+          ],
+          "preprocessingFactor": 0.43,
+          "sourceAnchor": [
+            1372,
+            596
+          ],
+          "alignment": "grounded",
+          "pasteOffset": [
+            92,
+            61
+          ],
+          "normalizedAnchor": [
+            191.76,
+            239.88
+          ],
+          "normalizedCropSize": [
+            225,
+            181
+          ],
+          "alpha32Bounds": [
+            2,
+            1,
+            221,
+            178
+          ]
+        },
+        "win_0": {
+          "source": "yungreal-main-source-v3-clean.png",
+          "sourceRect": [
+            232,
+            792,
+            153,
+            218
+          ],
+          "preprocessingFactor": 1.0,
+          "sourceAnchor": [
+            312,
+            1006
+          ],
+          "alignment": "grounded",
+          "pasteOffset": [
+            112,
+            26
+          ],
+          "normalizedAnchor": [
+            192.0,
+            240.0
+          ],
+          "normalizedCropSize": [
+            153,
+            218
+          ],
+          "alpha32Bounds": [
+            3,
+            4,
+            146,
+            210
+          ]
+        }
+      },
+      "packingPadding": 4,
+      "airborneBodyCenterY": 150
+    }
+  }
+}

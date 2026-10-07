@@ -1,0 +1,188 @@
+:root { font-family: Arial, sans-serif; color: #f0fff8; background: #052d36; color-scheme: dark; }
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 100%; height: 100%; overflow: hidden; overscroll-behavior: none; }
+button, select { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: default; opacity: 0.5; }
+#portrait-shell {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100dvh;
+  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+    env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+  --compact-hud-height: max(88px, calc(var(--hud-height, 104px) - 12px));
+  --control-height: clamp(88px, calc(var(--lower-height, 144px) * 0.72), 110px);
+  display: grid; grid-template-rows: var(--compact-hud-height) minmax(0, 1fr) auto var(--control-height) calc(var(--lower-height, 144px) - var(--control-height));
+  overflow: hidden; background: #056bdf;
+}
+/* Keep the approved band position; recovered footer space is an inactive gutter. */
+#portrait-shell::after { content: ''; background: #052d36; }
+#portrait-hud { z-index: 2; padding: 8px 16px 6px; background: #082e32; position: relative; }
+.portrait-pause-row { position: absolute; right: 12px; bottom: 0; }
+.portrait-values { display: grid; grid-template-columns: minmax(0, 1fr) 1fr minmax(0, 1fr); gap: 12px; }
+.portrait-values > div { min-width: 0; display: grid; gap: 3px; }
+.portrait-values > div:nth-child(2) { text-align: center; }
+.portrait-values > div:last-child { text-align: right; }
+.portrait-values span { font-size: 9px; color: #b3d4cd; }
+.portrait-values strong { font-size: 21px; line-height: 24px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+#portrait-money { color: #ffe083; }
+#portrait-lives { color: #ffadb7; }
+.portrait-streak-row { margin-top: 8px; margin-right: 56px; }
+#portrait-streak { display: block; font-size: 9px; height: 12px; color: #b3d4cd; }
+#portrait-streak-steps { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; margin-top: 3px; }
+#portrait-streak-steps i { height: 4px; background: #416267; border-radius: 1px; }
+#portrait-streak-steps i[data-filled='true'] { background: #39f2a7; }
+/* Cash Rush treatment stays inside the existing countdown row. */
+#portrait-shell[data-rush='true'] .portrait-streak-row {
+  background: rgb(255 211 87 / calc(0.04 + 0.12 * var(--cash-rush-pulse, 0)));
+  box-shadow: inset 0 -1px #cdaa48;
+}
+#portrait-shell[data-rush='true'] #portrait-streak { color: #fff0a8; font-weight: 700; }
+#portrait-shell[data-rush='true'] #portrait-streak-steps i { background: #554a29; }
+#portrait-shell[data-rush='true'] #portrait-streak-steps i[data-filled='true'] { background: #ffe083; }
+#portrait-streak-meter { position: absolute; width: 1px; height: 1px; clip-path: inset(50%); }
+#portrait-pause { position: relative; width: 44px; height: 44px; display: grid; place-items: center; border: 0; background: transparent; }
+#portrait-pause::before { content: ''; position: absolute; box-sizing: border-box; width: 30px; height: 30px; border: 1px solid #5c8c80; border-radius: 4px; background: #123e46; }
+.pause-symbol { position: relative; }
+.pause-symbol { display: block; width: 13px; height: 15px; border-left: 4px solid #f0fff8; border-right: 4px solid #f0fff8; }
+#portrait-pause[aria-label='Resume'] .pause-symbol { width: 0; height: 0; border-left: 12px solid #f0fff8; border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-right: 0; }
+#portrait-powers { position: absolute; z-index: 2; top: calc(100% + 8px); left: 16px; right: 16px; display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; pointer-events: none; }
+#portrait-powers[hidden] { display: none; }
+#portrait-powers span { padding: 4px 6px; background: #082e32e8; border-radius: 4px; color: #ffe083; font-size: 10px; font-variant-numeric: tabular-nums; }
+#portrait-atmosphere,
+#portrait-band {
+  --portrait-atmosphere-base: url('/assets/environment/gamdom-city-new/gamdom-city-sky.png') var(--sky-position, center top) / var(--sky-size, cover) no-repeat;
+  --portrait-band-base: url('/assets/environment/gamdom-city-new/gamdom-city-sky.png') var(--band-sky-position, center bottom) / var(--sky-size, cover) no-repeat;
+}
+#portrait-atmosphere {
+  min-height: 0;
+  background: var(--portrait-atmosphere-base);
+  transition: background-color 120ms linear;
+}
+#portrait-band { position: relative; width: 100%; height: var(--band-height, 263.25px); overflow: hidden; isolation: isolate; touch-action: none; background: var(--portrait-band-base); }
+#portrait-shell[data-district='casino'] {
+  background: #010605;
+}
+#portrait-shell[data-district='casino'] #portrait-atmosphere,
+#portrait-shell[data-district='casino'] #portrait-band {
+  /* Continue Runner's Casino sky above its existing PNG skyline, without a second scene. */
+  background: #010605;
+  transition: none;
+}
+#portrait-shell[data-district='casino'] #portrait-atmosphere {
+  position: relative;
+  overflow: hidden;
+}
+#portrait-shell[data-district='casino'] #portrait-atmosphere::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Uniformly scale the approved atmosphere and fade into the existing Casino sky. */
+  background: url('/assets/environment/gamdom-city-new/casino-portrait-atmosphere-game.png') center bottom / cover no-repeat;
+  opacity: 0.65;
+  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent);
+  mask-image: linear-gradient(to bottom, #000 70%, transparent);
+}
+#portrait-shell[data-district='neon'] {
+  background: #010b10;
+}
+#portrait-shell[data-district='neon'] #portrait-atmosphere,
+#portrait-shell[data-district='neon'] #portrait-band {
+  background: #010b10;
+  transition: none;
+}
+#portrait-shell[data-district='neon'] #portrait-atmosphere {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #010b10, #032027 58%, #010b10);
+}
+#portrait-shell[data-district='neon'] #portrait-atmosphere::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Uniform scaling exposes only the PNG's first 216 sky rows, above its moon and city. */
+  background: url('/assets/environment/gamdom-city-new/neon-boulevard-night-background.png') left top / auto 500% no-repeat;
+  opacity: 0.7;
+  -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent);
+  mask-image: linear-gradient(to bottom, #000 45%, transparent);
+}
+#portrait-shell[data-district='hq'] {
+  background: #010b14;
+}
+#portrait-shell[data-district='hq'] #portrait-atmosphere,
+#portrait-shell[data-district='hq'] #portrait-band {
+  background: #010b14;
+  transition: none;
+}
+#portrait-shell[data-district='hq'] #portrait-atmosphere {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(to bottom, #010b14, #031e25 58%, #010b14);
+}
+#portrait-shell[data-district='hq'] #portrait-atmosphere::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Only the first 216 source rows enter this crop, excluding the moon, skyline and waterline. */
+  background: url('/assets/environment/gamdom-city-new/gamdom-hq-approach-sky-game.png') left top / auto 500% no-repeat;
+  opacity: 0.7;
+  -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent);
+  mask-image: linear-gradient(to bottom, #000 45%, transparent);
+}
+#portrait-app { position: absolute; top: 0; left: var(--surface-left, -78px); width: var(--surface-width, 468px); height: var(--band-height, 263.25px); }
+#portrait-app canvas { display: block; touch-action: none; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 var(--sky-blend-height, 38px)); mask-image: linear-gradient(to bottom, transparent, #000 var(--sky-blend-height, 38px)); }
+#portrait-start { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; background: #06252a8c; }
+#portrait-start[hidden] { display: none; }
+#portrait-start-title { font-size: 25px; margin: 0; text-align: center; text-shadow: 0 2px 4px #051517; }
+.character-picker { display: flex; align-items: center; gap: 8px; font-size: 11px; color: #d0eee3; }
+.character-picker select { width: 108px; border: 1px solid #769da5; border-radius: 4px; padding: 6px; background: #123e46; color: #fff; font-size: 13px; }
+#portrait-play { min-width: 144px; height: 48px; border: 1px solid #b2ffe0; border-radius: 4px; background: #35f3a3; color: #032319; font-size: 18px; font-weight: 700; }
+#portrait-lower { position: relative; padding: 16px; background: #082e32; display: flex; flex-direction: column; justify-content: center; border-top: 1px solid #3b6264; }
+.portrait-guidance { display: grid; grid-template-columns: 35fr 65fr; width: 100%; pointer-events: none; }
+.portrait-guidance > div { min-width: 0; display: grid; gap: 7px; justify-items: center; padding: 10px 4px; color: #cceade; opacity: 1; transition: opacity 350ms, color 80ms, background-color 80ms; }
+.portrait-guidance > div > span { font-size: 10px; color: #a5c6bc; }
+.portrait-guidance strong { font-size: 17px; line-height: 24px; white-space: nowrap; }
+.portrait-guidance strong span { margin-left: 7px; color: #65efb4; }
+#portrait-shell[data-guidance-subtle='true'] .portrait-guidance > div { opacity: 0.65; }
+#portrait-shell .portrait-guidance > div[data-pressed='true'] { opacity: 1; color: #fff; background: #22614b; }
+#portrait-status { position: absolute; left: 12px; right: 12px; bottom: 8px; font-size: 12px; min-height: 14px; text-align: center; color: #ffe083; pointer-events: none; }
+/* District handoff overlay shares Runner's run-clock state and leaves HUD/controls outside. */
+.portrait-district-transition {
+  position: absolute; z-index: 1;
+  top: calc(env(safe-area-inset-top, 0px) + var(--compact-hud-height));
+  bottom: calc(env(safe-area-inset-bottom, 0px) + var(--lower-height, 144px));
+  left: env(safe-area-inset-left, 0px); right: env(safe-area-inset-right, 0px);
+  overflow: hidden; pointer-events: none;
+}
+.portrait-district-transition[hidden] { display: none; }
+.portrait-transition-veil { position: absolute; inset: 0; background: #020b09; opacity: var(--transition-veil-alpha, 0); }
+.portrait-transition-title {
+  position: absolute; top: calc(100% - var(--band-height, 263.25px) * 0.6); left: 0; right: 0;
+  transform: translate(var(--transition-title-x, 0px), -50%);
+  opacity: var(--transition-title-alpha, 0); text-align: center;
+  font: 900 14px Arial, sans-serif; line-height: 20px; color: #f1fff8;
+  text-shadow: 0 1px 2px #04110d;
+}
+.portrait-transition-accent {
+  position: absolute; top: calc(100% + 5px); left: calc(50% - 32px); width: 64px; height: 1px;
+  background: linear-gradient(to right, #31ef9f 74%, transparent 74% 77%, #d9b95d 77%);
+}
+.portrait-transition-sweep {
+  position: absolute; top: calc(100% - var(--band-height, 263.25px) * 0.526);
+  left: 0; width: calc(var(--surface-width, 468px) * 0.25); height: 1px;
+  background: #90ffd0; opacity: var(--transition-sweep-alpha, 0);
+  transform: translateX(var(--transition-sweep-x, -240px));
+}
+@media (max-height: 600px) {
+  #portrait-shell { --compact-hud-height: var(--hud-height); --control-height: var(--lower-height); }
+  #portrait-hud { padding: 6px 12px; }
+  .portrait-values strong { font-size: 17px; line-height: 20px; }
+  .portrait-streak-row { margin-top: 6px; }
+  #portrait-pause { width: 44px; height: 44px; }
+  #portrait-lower { padding: 4px 12px; }
+  .portrait-guidance > div { gap: 2px; padding: 3px; }
+  .portrait-guidance strong { font-size: 13px; line-height: 18px; }
+  #portrait-status { bottom: 2px; font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .portrait-guidance > div { transition: none; } }

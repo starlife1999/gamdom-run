@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>GAMDOM RUN - Portrait Prototype</title>
+  </head>
+  <body>
+    <main id="portrait-shell">
+      <header id="portrait-hud">
+        <div class="portrait-pause-row">
+          <button id="portrait-pause" type="button" aria-label="Pause" title="Pause" disabled>
+            <span class="pause-symbol" aria-hidden="true"></span>
+          </button>
+        </div>
+        <div class="portrait-values">
+          <div><span>MONEY</span><strong id="portrait-money">$0</strong></div>
+          <div><span>TIME</span><strong id="portrait-time">00:00</strong></div>
+          <div><span>LIVES</span><strong id="portrait-lives">3</strong></div>
+        </div>
+        <div class="portrait-streak-row">
+          <div class="portrait-streak-content">
+            <span id="portrait-streak">CASH STREAK</span>
+            <div id="portrait-streak-steps" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+          <progress id="portrait-streak-meter" max="10" value="0" aria-label="Cash streak"></progress>
+        </div>
+        <div id="portrait-powers" aria-live="off" hidden></div>
+      </header>
+      <div id="portrait-atmosphere" aria-hidden="true"></div>
+      <section id="portrait-band" aria-label="Gameplay">
+        <div id="portrait-app"></div>
+        <div id="portrait-start">
+          <h1 id="portrait-start-title">GAMDOM CITY</h1>
+          <label class="character-picker">Runner
+            <select id="portrait-character" aria-label="Runner">
+              <option value="0">Gamby</option>
+              <option value="1">Steve</option>
+              <option value="2">Yungreal</option>
+            </select>
+          </label>
+          <button id="portrait-play" type="button" disabled>PLAY</button>
+        </div>
+      </section>
+      <footer id="portrait-lower">
+        <div class="portrait-guidance" aria-label="Left: hold to slide or fast-fall. Right: tap to jump or double jump.">
+          <div id="portrait-guide-slide"><span>HOLD</span><strong>SLIDE <span aria-hidden="true">↓</span></strong></div>
+          <div id="portrait-guide-jump"><span>TAP</span><strong>JUMP <span aria-hidden="true">↑</span></strong></div>
+        </div>
+        <strong id="portrait-status" role="status"></strong>
+      </footer>
+    </main>
+    <script type="module" src="/src/prototypes/portraitPrototype.ts"></script>
+  </body>
+</html>
