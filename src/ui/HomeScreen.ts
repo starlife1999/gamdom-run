@@ -115,6 +115,11 @@ export class HomeScreen {
     this.game.events.emit('home-visibility');
   }
 
+  show(): void {
+    this.play.disabled = this.loading;
+    this.setVisible(true);
+  }
+
   private readonly hide = (): void => {
     this.play.disabled = true;
     this.menu = undefined;

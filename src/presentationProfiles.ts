@@ -23,7 +23,7 @@ export interface PrototypeSnapshot {
   streak: number;
   cashRush: number;
   paused: boolean;
-  ended: 'game-over' | null;
+  ended: 'game-over' | 'run-complete' | null;
   status: string;
   powers: ReadonlyArray<{ name: string; seconds: number }>;
 }

@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import { RunnerScene } from '../game/scenes/RunnerScene';
 import type { PortraitPrototypeProfile, PrototypeSnapshot } from '../presentationProfiles';
+import { PortraitCountdown } from './portraitCountdown';
 
 declare global {
   interface Window {
@@ -15,6 +16,9 @@ export class PortraitPresentation {
   private readonly hud = document.querySelector<HTMLElement>('#portrait-hud')!;
   private readonly play = document.querySelector<HTMLButtonElement>('#portrait-play')!;
   private readonly pause = document.querySelector<HTMLButtonElement>('#portrait-pause')!;
+  private readonly pauseMenu = document.querySelector<HTMLElement>('#portrait-pause-menu')!;
+  private readonly resume = document.querySelector<HTMLButtonElement>('#portrait-resume')!;
+  private readonly restart = document.querySelector<HTMLButtonElement>('#portrait-restart')!;
   private readonly character = document.querySelector<HTMLSelectElement>('#portrait-character')!;
   private readonly startPanel = document.querySelector<HTMLElement>('#portrait-start')!;
   private readonly title = document.querySelector<HTMLElement>('#portrait-start-title')!;
@@ -32,16 +36,80 @@ export class PortraitPresentation {
   };
   private readonly textElements = new Map<string, HTMLElement>();
   private readonly visualTouches = new Map<number, 'slide' | 'jump'>();
-  private powerText = '';
+  private readonly powerIndicators = [
+    { name: 'SHIELD', asset: 'shield', accent: '#76caff' },
+    { name: 'MONEY MAGNET', asset: 'money-magnet', accent: '#ffd778' },
+    { name: '2X CASH', asset: '2x-cash', accent: '#ffe083' },
+    { name: 'BOOST', asset: 'boost', accent: '#64f3d2' },
+    { name: 'MULTIPLIER', asset: 'multiplier', accent: '#88f59c' },
+  ].map(power => {
+    const element = document.createElement('div');
+    element.className = 'portrait-power';
+    element.dataset.power = power.name;
+    element.style.setProperty('--power-accent', power.accent);
+    element.setAttribute('role', 'img');
+    element.hidden = true;
+    const icon = document.createElement('img');
+    icon.src = `/assets/environment/gamdom-city/${power.asset}-game.png`;
+    icon.alt = '';
+    icon.width = 28;
+    icon.height = 28;
+    const timer = document.createElement('span');
+    timer.className = 'portrait-power-time';
+    timer.setAttribute('aria-hidden', 'true');
+    element.append(icon, timer);
+    return { name: power.name, element, timer };
+  });
   private district = 'city';
   private readonly resizeObserver = typeof ResizeObserver === 'function' ? new ResizeObserver(() => this.scheduleFit()) : undefined;
   private ready = false;
   private started = false;
+  private completionShown = false;
+  private gameOverShown = false;
   private destroyed = false;
   private frame = 0;
   private parentBounds = '';
+  private readonly countdown = new PortraitCountdown(this.band);
+  private countdownCreateListener?: () => void;
+  private onCountdownCancel = (): void => {
+    this.setHidden(this.startPanel, false);
+    this.setDisabled(this.character, false);
+  };
 
-  constructor(private readonly game: Phaser.Game, private readonly profile: PortraitPrototypeProfile) {
+  startWithCountdown(onCancel: () => void): void {
+    if (!this.ready || this.destroyed || this.countdown.active || this.countdownCreateListener) return;
+    this.onCountdownCancel = onCancel;
+    const runner = this.runner();
+    this.countdownCreateListener = () => {
+      this.countdownCreateListener = undefined;
+      // CREATE fires before Runner's first update; a paused scene still renders.
+      runner.preparePrototypeCountdown();
+      runner.events.once(Phaser.Scenes.Events.SHUTDOWN, this.countdown.cancel);
+      this.countdown.start(() => {
+        runner.events.off(Phaser.Scenes.Events.SHUTDOWN, this.countdown.cancel);
+        runner.finishPrototypeCountdown(true);
+        this.updateHud();
+      }, () => {
+        runner.events.off(Phaser.Scenes.Events.SHUTDOWN, this.countdown.cancel);
+        runner.finishPrototypeCountdown(false);
+        if (runner.sys.isPaused()) this.game.scene.stop('Runner');
+        this.started = false;
+        this.game.events.emit('portrait-audio-stop');
+        if (!this.destroyed) onCancel();
+      });
+      this.updateHud();
+    };
+    runner.events.once(Phaser.Scenes.Events.CREATE, this.countdownCreateListener);
+    this.start();
+  }
+
+  constructor(
+    private readonly game: Phaser.Game,
+    private readonly profile: PortraitPrototypeProfile,
+    private readonly onRunComplete?: (snapshot: PrototypeSnapshot) => void,
+    private readonly onGameOver?: (snapshot: PrototypeSnapshot) => void,
+  ) {
+    this.powers.append(...this.powerIndicators.map(power => power.element));
     this.districtTransition.className = 'portrait-district-transition';
     this.districtTransition.hidden = true;
     this.districtTransition.setAttribute('aria-hidden', 'true');
@@ -61,6 +129,8 @@ export class PortraitPresentation {
     game.events.once(Phaser.Core.Events.DESTROY, this.destroy);
     this.play.addEventListener('click', this.start);
     this.pause.addEventListener('click', this.togglePause);
+    this.resume.addEventListener('click', this.resumeRun);
+    this.restart.addEventListener('click', this.restartPausedRun);
     window.addEventListener('resize', this.scheduleFit);
     window.addEventListener('orientationchange', this.scheduleFit);
     window.visualViewport?.addEventListener('resize', this.scheduleFit);
@@ -92,7 +162,10 @@ export class PortraitPresentation {
 
   private readonly start = (): void => {
     if (!this.ready) return;
+    this.game.events.emit('portrait-audio-reset');
     this.started = true;
+    this.completionShown = false;
+    this.gameOverShown = false;
     this.clearTouchVisuals();
     this.setHidden(this.startPanel, true);
     this.setDisabled(this.character, true);
@@ -107,11 +180,42 @@ export class PortraitPresentation {
     return this.game.scene.getScene('Runner') as RunnerScene;
   }
 
+  leaveCompletedRun(): void {
+    if (this.runner().getPrototypeSnapshot()?.ended !== 'run-complete') return;
+    this.game.events.emit('portrait-audio-stop');
+    this.started = false;
+    this.game.scene.stop('Runner');
+  }
+
+  leaveGameOverRun(): void {
+    if (this.runner().getPrototypeSnapshot()?.ended !== 'game-over') return;
+    this.game.events.emit('portrait-audio-stop');
+    this.started = false;
+    this.game.scene.stop('Runner');
+  }
+
   private readonly togglePause = (): void => {
+    if (this.countdown.active || this.countdownCreateListener) return;
     const runner = this.runner();
     const snapshot = runner.getPrototypeSnapshot();
     if (snapshot) runner.setPrototypePaused(!snapshot.paused);
     this.updateHud();
+  };
+
+  private readonly resumeRun = (): void => {
+    if (this.countdown.active || this.countdownCreateListener) return;
+    this.runner().setPrototypePaused(false);
+    this.updateHud();
+    this.pause.focus({ preventScroll: true });
+  };
+
+  private readonly restartPausedRun = (): void => {
+    if (this.destroyed || this.countdown.active || this.countdownCreateListener) return;
+    const snapshot = this.runner().getPrototypeSnapshot();
+    if (!snapshot?.paused || snapshot.ended) return;
+    this.setHidden(this.pauseMenu, true);
+    this.character.value = String(snapshot.character);
+    this.startWithCountdown(this.onCountdownCancel);
   };
 
   private text(id: string, value: string): void {
@@ -155,41 +259,84 @@ export class PortraitPresentation {
     if (!this.started || this.destroyed) return;
     const snapshot = this.runner().getPrototypeSnapshot();
     if (!snapshot) return;
+    this.game.events.emit('portrait-audio-state', snapshot, !this.countdown.active && !this.countdownCreateListener);
     const seconds = Math.floor(snapshot.elapsed);
     this.text('portrait-time', `${Math.floor(seconds / 60).toString().padStart(2, '0')}:${(seconds % 60).toString().padStart(2, '0')}`);
-    this.text('portrait-money', `$${snapshot.money.toLocaleString()}`);
+    const cash = `$${snapshot.money.toLocaleString()}`;
+    this.text('portrait-money', cash);
+    this.setData(this.textElements.get('portrait-money')!, 'compact', String(cash.length > 8));
     this.text('portrait-lives', `${snapshot.lives}`);
     const rush = this.runner().getCashRushPresentation();
     const rushActive = snapshot.cashRush > 0 && rush.active && !snapshot.ended;
+    this.setData(this.shell, 'normalHud', String(!snapshot.ended && !this.countdown.active && !this.countdownCreateListener));
     this.text('portrait-streak', rushActive ? `CASH RUSH ${snapshot.cashRush.toFixed(1)}s` : 'CASH STREAK');
-    this.setProgressValue(this.meter, snapshot.streak);
-    const filledSteps = rushActive ? Math.ceil(rush.remainingFraction * this.steps.length) : snapshot.streak;
+    const filledSteps = rushActive
+      ? Phaser.Math.Clamp(Math.ceil(rush.remainingFraction * this.steps.length), 0, this.steps.length)
+      : Phaser.Math.Clamp(snapshot.streak, 0, this.steps.length);
+    this.setProgressValue(this.meter, rushActive ? filledSteps : snapshot.streak);
+    this.setAttributeValue(this.meter, 'aria-label', rushActive ? 'Cash Rush countdown' : 'Cash streak');
     this.steps.forEach((step, i) => this.setData(step, 'filled', String(i < filledSteps)));
     this.setData(this.shell, 'rush', String(rushActive));
     if (rushActive) this.setStyleProperty(this.shell, '--cash-rush-pulse', String(rush.activationPulse));
     else if (this.shell.style.getPropertyValue('--cash-rush-pulse')) this.shell.style.removeProperty('--cash-rush-pulse');
     this.setData(this.shell, 'guidanceSubtle', String(snapshot.elapsed >= 5));
-    const powerText = snapshot.powers.map(power => `${power.name} ${power.seconds.toFixed(1)}s`).join('|');
-    if (powerText !== this.powerText) {
-      this.powerText = powerText;
-      this.powers.replaceChildren(...snapshot.powers.map(power => {
-        const chip = document.createElement('span');
-        chip.textContent = `${power.name} ${power.seconds.toFixed(1)}s`;
-        return chip;
-      }));
-    }
-    this.setHidden(this.powers, snapshot.powers.length === 0);
+    this.updatePowers(snapshot);
     this.updateDistrictAtmosphere(snapshot.elapsed, !!snapshot.ended);
     if (snapshot.paused || snapshot.ended) this.clearTouchVisuals();
     this.text('portrait-status', snapshot.ended ? '' : snapshot.paused ? 'PAUSED' : snapshot.status);
     const pauseLabel = snapshot.paused ? 'Resume' : 'Pause';
     this.setAttributeValue(this.pause, 'aria-label', pauseLabel);
     this.setTitle(this.pause, pauseLabel);
-    this.setDisabled(this.pause, !!snapshot.ended);
+    this.setDisabled(this.pause, !!snapshot.ended || this.countdown.active || !!this.countdownCreateListener);
+    const showPauseMenu = snapshot.paused && !snapshot.ended && !this.countdown.active && !this.countdownCreateListener;
+    const openingPauseMenu = showPauseMenu && this.pauseMenu.hidden;
+    this.setHidden(this.pauseMenu, !showPauseMenu);
+    if (openingPauseMenu) this.resume.focus({ preventScroll: true });
     this.showEnd(snapshot);
   };
 
+  private updatePowers(snapshot: PrototypeSnapshot): void {
+    const gameplay = !snapshot.ended && !this.countdown.active && !this.countdownCreateListener;
+    let activeCount = 0;
+    for (const indicator of this.powerIndicators) {
+      let power: PrototypeSnapshot['powers'][number] | undefined;
+      if (gameplay) {
+        for (const active of snapshot.powers) {
+          if (active.name === indicator.name) {
+            power = active;
+            break;
+          }
+        }
+      }
+      this.setHidden(indicator.element, !power);
+      if (!power) continue;
+      activeCount++;
+      const time = `${power.seconds.toFixed(1)}s`;
+      if (indicator.timer.textContent !== time) {
+        indicator.timer.textContent = time;
+        this.setAttributeValue(indicator.element, 'aria-label', `${indicator.name}, ${time} remaining`);
+      }
+    }
+    this.setHidden(this.powers, activeCount === 0);
+  }
+
   private showEnd(snapshot: PrototypeSnapshot): void {
+    if (snapshot.ended === 'game-over' && this.onGameOver) {
+      this.setHidden(this.startPanel, true);
+      if (!this.gameOverShown) {
+        this.gameOverShown = true;
+        this.onGameOver(snapshot);
+      }
+      return;
+    }
+    if (snapshot.ended === 'run-complete' && this.onRunComplete) {
+      this.setHidden(this.startPanel, true);
+      if (!this.completionShown) {
+        this.completionShown = true;
+        this.onRunComplete(snapshot);
+      }
+      return;
+    }
     this.setHidden(this.startPanel, !snapshot.ended);
     this.setDisabled(this.character, !snapshot.ended);
     if (snapshot.ended) {
@@ -313,10 +460,15 @@ export class PortraitPresentation {
 
   private readonly destroy = (): void => {
     this.destroyed = true;
+    if (this.countdownCreateListener) this.runner().events.off(Phaser.Scenes.Events.CREATE, this.countdownCreateListener);
+    this.countdownCreateListener = undefined;
+    this.countdown.destroy();
     cancelAnimationFrame(this.frame);
     this.resizeObserver?.disconnect();
     this.play.removeEventListener('click', this.start);
     this.pause.removeEventListener('click', this.togglePause);
+    this.resume.removeEventListener('click', this.resumeRun);
+    this.restart.removeEventListener('click', this.restartPausedRun);
     window.removeEventListener('resize', this.scheduleFit);
     window.removeEventListener('orientationchange', this.scheduleFit);
     window.visualViewport?.removeEventListener('resize', this.scheduleFit);

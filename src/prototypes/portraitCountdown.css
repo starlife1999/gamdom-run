@@ -1,0 +1,32 @@
+#portrait-countdown {
+  position: fixed;
+  inset: 0;
+  z-index: 11003;
+  background: transparent;
+  touch-action: none;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+#portrait-countdown[hidden] { display: none; }
+.portrait-countdown-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  text-align: center;
+}
+.portrait-countdown-number {
+  display: block;
+  color: #ffdc77;
+  font: 900 128px / 1 Arial, sans-serif;
+  letter-spacing: 0;
+  white-space: nowrap;
+  text-shadow: 0 4px 0 #614714, 0 6px 12px rgb(0 0 0 / 60%), 0 0 18px rgb(255 210 84 / 28%);
+  animation: portrait-countdown-in 160ms ease-out both;
+}
+#portrait-countdown[data-go='true'] .portrait-countdown-number {
+  color: #20efa0;
+  text-shadow: 0 4px 0 #065936, 0 6px 12px rgb(0 0 0 / 60%), 0 0 18px rgb(32 239 160 / 30%);
+}
+@keyframes portrait-countdown-in { from { transform: scale(0.86); } to { transform: scale(1); } }
+@media (max-height: 500px) { .portrait-countdown-number { font-size: 96px; } }
+@media (prefers-reduced-motion: reduce) { .portrait-countdown-number { animation: none; } }

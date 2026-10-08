@@ -1,0 +1,55 @@
+#game-over-screen {
+  position: fixed; inset: 0; z-index: 40; height: 100dvh; overflow: hidden;
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+    max(20px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  background: #081016 url('/assets/environment/gamdom-city-new/neon-boulevard-night-background.png') center / cover no-repeat;
+  color: #f4fffb; font-family: Arial, sans-serif;
+}
+#game-over-screen[hidden] { display: none; }
+.over-city { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.over-skyline { position: absolute; bottom: 18%; left: -35%; width: 170%; height: 64%; object-fit: contain; object-position: bottom; }
+.over-landmark { position: absolute; bottom: 19%; left: -8%; width: 116%; height: 54%; object-fit: contain; object-position: bottom; }
+.over-road { position: absolute; bottom: 0; left: -40%; width: 180%; height: 28%; object-fit: cover; }
+.over-city::after { content: ''; position: absolute; inset: 0; background: rgb(10 5 12 / 28%); border-top: 1px solid #9c293d; box-shadow: inset 0 12px 18px rgb(193 37 55 / 12%); }
+.over-content {
+  position: relative; height: 100%; width: min(100%, 440px); margin: 0 auto;
+  display: grid; grid-template-rows: 58px 58px minmax(0, 1fr) 104px 60px 46px; gap: 12px;
+}
+.over-logo { width: 138px; height: 58px; object-fit: contain; justify-self: center; }
+#game-over-title {
+  margin: 0; align-self: center; text-align: center; font-size: 46px; line-height: 1.05;
+  font-weight: 900; font-style: italic; color: #ff6376;
+  text-shadow: 0 3px #9b182c, 0 5px #350a14, 0 0 18px rgb(241 52 76 / 65%);
+}
+.over-runner-stage { position: relative; min-height: 0; display: grid; align-items: end; justify-items: center; }
+.over-runner { position: relative; background-repeat: no-repeat; filter: drop-shadow(0 5px 2px #070a0e); }
+.over-bird { position: absolute; right: 10%; top: 14%; width: 80px; height: 46px; object-fit: contain; }
+.over-cone { position: absolute; right: 0; bottom: 0; width: 42px; height: 58px; object-fit: contain; }
+.over-results {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  border: 1px solid #95695f; border-radius: 8px; background: #1b1117f2;
+  box-shadow: 0 0 12px rgb(170 61 65 / 18%); padding: 10px;
+}
+#game-over-cash { max-width: 100%; font-size: 44px; line-height: 1.1; color: #ffe47d; font-weight: 900; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+#game-over-cash[data-compact='true'] { font-size: 26px; }
+.over-results span { color: #fff0a8; font-size: 13px; font-weight: 800; }
+#game-over-again, #game-over-change {
+  position: relative; width: 100%; border: 1px solid #88ffc0; border-radius: 8px;
+  color: #fff; font-weight: 900; letter-spacing: 0; cursor: pointer;
+}
+#game-over-again { background: #00b75c; font-size: 25px; box-shadow: inset 0 0 12px rgb(52 255 162 / 45%), 0 0 16px rgb(32 239 160 / 26%); }
+#game-over-change { background: #052c22ed; border-color: #0aba75; font-size: 14px; }
+#game-over-again:hover { background: #00cb68; }
+#game-over-change:hover { background: #074737; }
+#game-over-again:active, #game-over-change:active { background: #075c37; }
+#game-over-again:focus-visible, #game-over-change:focus-visible { outline: 2px solid #fff0a8; outline-offset: 3px; }
+.over-chevron { position: absolute; top: 50%; right: 24px; width: 12px; height: 12px; border-top: 3px solid #abffd7; border-right: 3px solid #abffd7; transform: translateY(-50%) rotate(45deg); }
+@media (max-width: 350px) {
+  #game-over-title { font-size: 40px; }
+  #game-over-cash { font-size: 38px; }
+}
+@media (max-height: 700px) {
+  .over-content { grid-template-rows: 46px 48px minmax(0, 1fr) 86px 52px 44px; gap: 10px; }
+  .over-logo { height: 46px; width: 116px; }
+  #game-over-again { font-size: 23px; }
+}

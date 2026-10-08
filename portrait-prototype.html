@@ -15,9 +15,17 @@
           </button>
         </div>
         <div class="portrait-values">
-          <div><span>MONEY</span><strong id="portrait-money">$0</strong></div>
-          <div><span>TIME</span><strong id="portrait-time">00:00</strong></div>
-          <div><span>LIVES</span><strong id="portrait-lives">3</strong></div>
+          <div>
+            <img class="portrait-hud-icon" src="/assets/environment/gamdom-city/gamdom-coin-game.png" alt="" width="20" height="20">
+            <span class="portrait-value-label">MONEY</span><strong id="portrait-money">$0</strong>
+          </div>
+          <div><span class="portrait-value-label">TIME</span><strong id="portrait-time">00:00</strong></div>
+          <div>
+            <svg class="portrait-hud-icon portrait-life-icon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <path d="M12 21 3.5 12.5C-2 6.8 5.7-.8 12 5.5 18.3-.8 26 6.8 20.5 12.5Z" fill="#ff4b68" stroke="#ff8396" stroke-width="0.6"></path>
+            </svg>
+            <span class="portrait-value-label">LIVES</span><span class="portrait-life-prefix" aria-hidden="true">&times;</span><strong id="portrait-lives">3</strong>
+          </div>
         </div>
         <div class="portrait-streak-row">
           <div class="portrait-streak-content">
@@ -33,6 +41,13 @@
       <div id="portrait-atmosphere" aria-hidden="true"></div>
       <section id="portrait-band" aria-label="Gameplay">
         <div id="portrait-app"></div>
+        <div id="portrait-pause-menu" hidden>
+          <button id="portrait-sound" type="button" aria-label="Mute sound" aria-pressed="false" title="Mute sound"></button>
+          <div class="portrait-pause-actions" role="group" aria-label="Paused run">
+            <button id="portrait-resume" type="button">RESUME</button>
+            <button id="portrait-restart" type="button">RESTART</button>
+          </div>
+        </div>
         <div id="portrait-start">
           <h1 id="portrait-start-title">GAMDOM CITY</h1>
           <label class="character-picker">Runner

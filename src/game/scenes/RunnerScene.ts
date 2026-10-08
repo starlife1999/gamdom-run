@@ -1173,12 +1173,14 @@ export class RunnerScene extends Phaser.Scene {
       this.player.vy = -840;
       this.player.onGround = false;
       this.player.jumpCount = 1;
+      if (this.prototypeProfile) this.game.events.emit('portrait-audio-cue', 'jump');
       return true;
     }
     if (this.player.jumpCount < 2) {
       this.player.fastFalling = false;
       this.player.vy = -720;
       this.player.jumpCount += 1;
+      if (this.prototypeProfile) this.game.events.emit('portrait-audio-cue', 'double-jump');
       return true;
     }
     return false;
@@ -1210,6 +1212,7 @@ export class RunnerScene extends Phaser.Scene {
 
   private startSlide(duration: number): void {
     if (!this.player.onGround) return;
+    if (this.prototypeProfile && !this.player.sliding) this.game.events.emit('portrait-audio-cue', 'slide');
     this.player.y = this.groundY;
     this.player.sliding = true;
     this.player.slideTime = duration;
@@ -1757,6 +1760,7 @@ export class RunnerScene extends Phaser.Scene {
         const scoreMultiplier = this.multiplierTimer > 0 ? SCORE_MULTIPLIER : 1;
         const payout = Math.round(item.value * cashMultiplier);
         this.money += payout;
+        if (this.prototypeProfile && !cashRushActivated) this.game.events.emit('portrait-audio-cue', 'coin');
         this.score += 120 * scoreMultiplier;
         if (!cashRushActivated) this.flashStatus(`+$${payout.toLocaleString()}`, '#a9ffb4');
         if (this.cashRushTimer > 0) this.showCashRushCollection(item.x, item.y);
@@ -1772,6 +1776,7 @@ export class RunnerScene extends Phaser.Scene {
       }
 
       if (isNegativeMoneyToken(item.type)) {
+        if (this.prototypeProfile) this.game.events.emit('portrait-audio-cue', 'negative');
         const penalty = Math.abs(item.value);
         this.money = Math.max(0, this.money - penalty);
         this.cashStreak = 0;
@@ -1805,6 +1810,7 @@ export class RunnerScene extends Phaser.Scene {
       this.invulnerabilityTimer = HIT_INVULNERABILITY_SECONDS;
       item.active = false;
       this.flashStatus('BLOCKED', '#d9fbff');
+      if (this.prototypeProfile) this.game.events.emit('portrait-audio-cue', 'shield');
       return;
     }
 
@@ -1819,6 +1825,7 @@ export class RunnerScene extends Phaser.Scene {
     this.hitFeedbackTimer = HIT_FEEDBACK_SECONDS;
     this.invulnerabilityTimer = HIT_INVULNERABILITY_SECONDS;
     this.lives = Math.max(0, this.lives - 1);
+    if (this.prototypeProfile) this.game.events.emit('portrait-audio-cue', 'damage');
     item.active = false;
     this.flashStatus(`-$${penalty.toLocaleString()}`, '#ffb0b0');
     this.cameras.main.shake(90, 0.002);
@@ -1833,6 +1840,7 @@ export class RunnerScene extends Phaser.Scene {
     this.cashRushTimer = CASH_RUSH_SECONDS;
     this.cashRushes += 1;
     this.showCashRushActivated();
+    if (this.prototypeProfile) this.game.events.emit('portrait-audio-cue', 'rush');
     return true;
   }
 
@@ -1899,6 +1907,7 @@ export class RunnerScene extends Phaser.Scene {
   }
 
   private applyPower(effect: PowerKind): void {
+    if (this.prototypeProfile) this.game.events.emit('portrait-audio-cue', 'power');
     switch (effect) {
       case 'shield':
         this.player.shield = 1;
@@ -2477,8 +2486,8 @@ export class RunnerScene extends Phaser.Scene {
       case 'win': frame = 'win_0'; break;
     }
     // The body baseline is 12 pixels above the atlas canvas bottom; physics stays untouched.
-    this.playerSprite.setFrame(frame)
-      .setPosition(this.player.x, this.player.y + GAMBY_BASELINE_PADDING * GAMBY_VISUAL_SCALE)
+    if (!this.prototypeProfile || this.playerSprite.frame.name !== frame) this.playerSprite.setFrame(frame);
+    this.playerSprite.setPosition(this.player.x, this.player.y + GAMBY_BASELINE_PADDING * GAMBY_VISUAL_SCALE)
       .setScale(GAMBY_VISUAL_SCALE).setRotation(0).setAlpha(1).setVisible(true);
   }
 
@@ -2500,8 +2509,8 @@ export class RunnerScene extends Phaser.Scene {
       case 'win': frame = 'win_0'; break;
     }
     // Only compensate atlas padding; real low slide artwork uses the same uniform scale.
-    this.playerSprite.setFrame(frame)
-      .setPosition(this.player.x, this.player.y + STEVE_BASELINE_PADDING * STEVE_VISUAL_SCALE)
+    if (!this.prototypeProfile || this.playerSprite.frame.name !== frame) this.playerSprite.setFrame(frame);
+    this.playerSprite.setPosition(this.player.x, this.player.y + STEVE_BASELINE_PADDING * STEVE_VISUAL_SCALE)
       .setScale(STEVE_VISUAL_SCALE).setRotation(0).setAlpha(1).setVisible(true);
   }
 
@@ -2523,8 +2532,8 @@ export class RunnerScene extends Phaser.Scene {
       case 'win': frame = 'win_0'; break;
     }
     // Preprocessing owns body normalization; every pose uses one runtime scale.
-    this.playerSprite.setFrame(frame)
-      .setPosition(this.player.x, this.player.y + YUNGREAL_BASELINE_PADDING * YUNGREAL_VISUAL_SCALE)
+    if (!this.prototypeProfile || this.playerSprite.frame.name !== frame) this.playerSprite.setFrame(frame);
+    this.playerSprite.setPosition(this.player.x, this.player.y + YUNGREAL_BASELINE_PADDING * YUNGREAL_VISUAL_SCALE)
       .setScale(YUNGREAL_VISUAL_SCALE).setRotation(0).setAlpha(1).setVisible(true);
   }
 
@@ -2658,7 +2667,9 @@ export class RunnerScene extends Phaser.Scene {
         const imageScale = item.type === 'overhead' ? HANGING_SIGN.scale
           : directVisual ? directVisual.displayWidth / directVisual.width
           : obstacleVisual ? 1 / OBSTACLE_TEXTURE_SCALE : scale;
-        sprite.setPosition(item.x, imageY).setScale(imageScale).setDepth(depth);
+        sprite.setPosition(item.x, imageY).setScale(imageScale);
+        // Phaser queues a display-list sort even when setDepth receives the current value.
+        if (!this.prototypeProfile || sprite.depth !== depth) sprite.setDepth(depth);
         if (item.type === 'overhead') sprite.setCrop(0, HANGING_SIGN.cropTop, HANGING_SIGN.width, HANGING_SIGN.height - HANGING_SIGN.cropTop);
         else sprite.setCrop();
         if (item.type.startsWith('coin') && this.cashRushTimer > 0) sprite.setTint(0xffe08a);
@@ -2742,6 +2753,8 @@ export class RunnerScene extends Phaser.Scene {
     const strokeThickness = 4;
     const fontSize = 12;
     const previous = this.itemLabelVisualStates.get(label);
+    if (this.prototypeProfile && previous?.text === text && previous.color === color
+      && previous.stroke === stroke && previous.strokeThickness === strokeThickness && previous.fontSize === fontSize) return;
     if (previous?.text !== text) label.setText(text);
     if (previous?.color !== color) label.setColor(color);
     if (previous?.stroke !== stroke || previous?.strokeThickness !== strokeThickness) label.setStroke(stroke, strokeThickness);
@@ -2919,6 +2932,25 @@ export class RunnerScene extends Phaser.Scene {
     if (this.prototypeProfile && !this.prototypeEnded && this.paused !== paused) this.togglePause();
   }
 
+  public preparePrototypeCountdown(): void {
+    if (!this.prototypeProfile) return;
+    this.clearControlInput();
+    this.renderBackground();
+    this.renderPlayer();
+    this.renderItems();
+    this.input.enabled = false;
+    if (this.input.keyboard) this.input.keyboard.enabled = false;
+    this.sys.pause();
+  }
+
+  public finishPrototypeCountdown(startRun: boolean): void {
+    if (!this.prototypeProfile) return;
+    this.clearControlInput();
+    this.input.enabled = true;
+    if (this.input.keyboard) this.input.keyboard.enabled = true;
+    if (startRun) this.sys.resume();
+  }
+
   public cancelPrototypeGesture(): void {
     if (this.prototypeProfile) {
       this.controlInput.clearPointers();
@@ -2937,6 +2969,12 @@ export class RunnerScene extends Phaser.Scene {
   private completeRun(): void {
     if (!this.running || this.dead) return;
     this.running = false;
+    // BEGIN PORTRAIT PROTOTYPE
+    if (this.prototypeProfile) {
+      this.endPrototype('run-complete');
+      return;
+    }
+    // END PORTRAIT PROTOTYPE
     this.scene.start('Result', {
       money: this.money,
       distance: this.distance,

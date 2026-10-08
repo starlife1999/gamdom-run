@@ -1,0 +1,49 @@
+# Dependencies and generated output
+node_modules/
+dist/
+coverage/
+
+# Local test captures, inspection images and logs
+artifacts/
+prototype-screenshots/
+playwright-report/
+test-results/
+/screenshots/
+/*.png
+/*.jpeg
+/*.jpg
+/*.webp
+*.log
+install.err
+
+# Secrets and local certificates (example environment files are safe templates)
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+credentials.json
+
+# Caches and temporary/editor files
+.cache/
+.vite/
+.wrangler/
+.npm/
+.pnpm-store/
+*.tsbuildinfo
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini

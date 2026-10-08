@@ -1,0 +1,60 @@
+#run-complete-screen {
+  position: fixed; inset: 0; z-index: 40; height: 100dvh; overflow: hidden;
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+    max(20px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  background: #031410 url('/assets/environment/gamdom-city-new/casino-portrait-atmosphere-game.png') center / cover no-repeat;
+  color: #f4fffb; font-family: Arial, sans-serif;
+}
+#run-complete-screen[hidden] { display: none; }
+.complete-city { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.complete-skyline { position: absolute; bottom: 18%; left: -35%; width: 170%; height: 68%; object-fit: contain; object-position: bottom; }
+.complete-landmark { position: absolute; bottom: 14%; left: -12%; width: 124%; height: 62%; object-fit: contain; object-position: bottom; }
+.complete-road { position: absolute; bottom: 0; left: -40%; width: 180%; height: 25%; object-fit: cover; }
+.complete-content {
+  position: relative; height: 100%; width: min(100%, 440px); margin: 0 auto;
+  display: grid; grid-template-rows: 58px 58px minmax(0, 1fr) 104px 60px 46px; gap: 12px;
+}
+.complete-logo { width: 138px; height: 58px; object-fit: contain; justify-self: center; }
+#run-complete-title {
+  margin: 0; align-self: center; text-align: center; font-size: 36px; line-height: 1.05;
+  font-weight: 900; font-style: italic; color: #ffe47d;
+  text-shadow: 0 3px #936217, 0 5px #3e2607, 0 0 16px rgb(255 192 50 / 65%);
+}
+.complete-victory { position: relative; min-height: 0; display: grid; align-items: end; justify-items: center; }
+.complete-runner { position: relative; background-repeat: no-repeat; flex-shrink: 0; filter: drop-shadow(0 5px 2px #021109); }
+.complete-coins { position: absolute; inset: 0; pointer-events: none; }
+.complete-coins img { position: absolute; width: 36px; height: 36px; object-fit: contain; }
+.complete-coins img:nth-child(1) { left: 1%; bottom: 4%; transform: rotate(-20deg); }
+.complete-coins img:nth-child(2) { left: 7%; bottom: 34%; width: 28px; height: 28px; }
+.complete-coins img:nth-child(3) { left: 16%; bottom: 67%; transform: rotate(16deg); }
+.complete-coins img:nth-child(4) { right: 1%; bottom: 7%; transform: rotate(22deg); }
+.complete-coins img:nth-child(5) { right: 8%; bottom: 36%; width: 28px; height: 28px; }
+.complete-coins img:nth-child(6) { right: 15%; bottom: 68%; transform: rotate(-15deg); }
+.complete-results {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+  border: 1px solid #a58c37; border-radius: 8px; background: #0a1907ed;
+  box-shadow: 0 0 14px rgb(255 206 56 / 20%); padding: 10px;
+}
+#run-complete-cash { max-width: 100%; font-size: 44px; line-height: 1.1; color: #ffe47d; font-weight: 900; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+#run-complete-cash[data-compact='true'] { font-size: 26px; }
+.complete-results span { color: #fff0a8; font-size: 13px; font-weight: 800; }
+#run-complete-again, #run-complete-change {
+  position: relative; width: 100%; border: 1px solid #88ffc0; border-radius: 8px;
+  color: #fff; font-weight: 900; letter-spacing: 0; cursor: pointer;
+}
+#run-complete-again { background: #00b75c; font-size: 25px; box-shadow: inset 0 0 12px rgb(52 255 162 / 45%), 0 0 16px rgb(32 239 160 / 26%); }
+#run-complete-change { background: #052c22ed; border-color: #0aba75; font-size: 14px; }
+#run-complete-again:hover { background: #00cb68; }
+#run-complete-change:hover { background: #074737; }
+#run-complete-again:active, #run-complete-change:active { background: #075c37; }
+#run-complete-again:focus-visible, #run-complete-change:focus-visible { outline: 2px solid #fff0a8; outline-offset: 3px; }
+.complete-chevron { position: absolute; top: 50%; right: 24px; width: 12px; height: 12px; border-top: 3px solid #abffd7; border-right: 3px solid #abffd7; transform: translateY(-50%) rotate(45deg); }
+@media (max-width: 350px) {
+  #run-complete-title { font-size: 30px; }
+  #run-complete-cash { font-size: 38px; }
+}
+@media (max-height: 700px) {
+  .complete-content { grid-template-rows: 46px 48px minmax(0, 1fr) 86px 52px 44px; gap: 10px; }
+  .complete-logo { height: 46px; width: 116px; }
+  #run-complete-again { font-size: 23px; }
+}

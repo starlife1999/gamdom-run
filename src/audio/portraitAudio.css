@@ -1,0 +1,9 @@
+#portrait-sound {
+  position: absolute; top: 12px; right: 12px;
+  width: 44px; height: 44px; padding: 0; display: grid; place-items: center;
+  border: 1px solid #20efa0; border-radius: 4px;
+  background: #061f1b; color: #f0fff8; touch-action: manipulation;
+}
+#portrait-sound[aria-pressed='true'] { color: #a5b7b0; border-color: #76958a; }
+#portrait-sound:focus-visible { outline: 2px solid #ffdf78; outline-offset: 2px; }
+#portrait-sound:active { background: #11523d; }
